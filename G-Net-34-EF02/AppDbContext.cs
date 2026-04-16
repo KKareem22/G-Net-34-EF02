@@ -19,6 +19,8 @@ namespace G_Net_34_EF02
         public DbSet<Organizer> Organizers { get; set; }
         public DbSet<OrganizerProfile> OrganizerProfiles { get; set; }
         public DbSet<Attendee> Attendees { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<Category> Categories { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -26,6 +28,23 @@ namespace G_Net_34_EF02
             modelBuilder.Entity<Attendee>()
                 .OwnsOne(a => a.Address);
             modelBuilder.ApplyConfiguration(new BadgeConfigration());
+
+            modelBuilder.Entity<Event>(entity =>
+            {
+                entity.Property(e => e.Title)
+                .IsRequired()
+                .HasMaxLength(50);
+                entity.Property(e => e.Description)
+                .HasMaxLength(500);
+
+
+            });
+            modelBuilder.Entity<Organizer>()
+                .HasMany(o => o.Events)
+                .WithOne(e => e.Organizer)
+                .HasForeignKey(e => e.OrganizerId);
+
         }
+
     }
 }

@@ -23,5 +23,7 @@ namespace G_Net_34_EF02.Model
         
         //Navigation Property
         public OrganizerProfile Profile { get; set; } = default!;
+
+        public ICollection<Event> Events { get; set; } = new HashSet<Event>();
     }
 }

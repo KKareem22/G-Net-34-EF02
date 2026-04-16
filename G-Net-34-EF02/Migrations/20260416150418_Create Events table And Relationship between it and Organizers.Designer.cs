@@ -4,6 +4,7 @@ using G_Net_34_EF02;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace G_Net_34_EF02.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260416150418_Create Events table And Relationship between it and Organizers")]
+    partial class CreateEventstableAndRelationshipbetweenitandOrganizers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,23 +73,6 @@ namespace G_Net_34_EF02.Migrations
                     b.ToTable("Badge");
                 });
 
-            modelBuilder.Entity("G_Net_34_EF02.Model.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CategoryName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-                });
-
             modelBuilder.Entity("G_Net_34_EF02.Model.Event", b =>
                 {
                     b.Property<int>("Id")
@@ -94,9 +80,6 @@ namespace G_Net_34_EF02.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)
@@ -120,8 +103,6 @@ namespace G_Net_34_EF02.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
 
                     b.HasIndex("OrganizerId");
 
@@ -229,19 +210,11 @@ namespace G_Net_34_EF02.Migrations
 
             modelBuilder.Entity("G_Net_34_EF02.Model.Event", b =>
                 {
-                    b.HasOne("G_Net_34_EF02.Model.Category", "Category")
-                        .WithMany("Events")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("G_Net_34_EF02.Model.Organizer", "Organizer")
                         .WithMany("Events")
                         .HasForeignKey("OrganizerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Category");
 
                     b.Navigation("Organizer");
                 });
@@ -260,11 +233,6 @@ namespace G_Net_34_EF02.Migrations
             modelBuilder.Entity("G_Net_34_EF02.Model.Attendee", b =>
                 {
                     b.Navigation("Badge");
-                });
-
-            modelBuilder.Entity("G_Net_34_EF02.Model.Category", b =>
-                {
-                    b.Navigation("Events");
                 });
 
             modelBuilder.Entity("G_Net_34_EF02.Model.Organizer", b =>
