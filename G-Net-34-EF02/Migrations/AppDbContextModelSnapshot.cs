@@ -34,7 +34,7 @@ namespace G_Net_34_EF02.Migrations
 
                     b.HasIndex("EventsId");
 
-                    b.ToTable("AttendeeEvent");
+                    b.ToTable("EventRegistrations", (string)null);
                 });
 
             modelBuilder.Entity("G_Net_34_EF02.Model.Attendee", b =>

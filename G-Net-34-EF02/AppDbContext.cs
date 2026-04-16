@@ -46,7 +46,8 @@ namespace G_Net_34_EF02
 
             modelBuilder.Entity<Attendee>()
                 .HasMany(a => a.Events)
-                .WithMany(e => e.Attendees);
+                .WithMany(e => e.Attendees)
+                .UsingEntity(j=>j.ToTable("EventRegistrations"));
         }
 
     }

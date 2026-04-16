@@ -5,13 +5,13 @@
 namespace G_Net_34_EF02.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateRelationShipsAttendeeEvent : Migration
+    public partial class CreateRelationShipsEventRegistrations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AttendeeEvent",
+                name: "EventRegistrations",
                 columns: table => new
                 {
                     AttendeesId = table.Column<int>(type: "int", nullable: false),
@@ -19,15 +19,15 @@ namespace G_Net_34_EF02.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AttendeeEvent", x => new { x.AttendeesId, x.EventsId });
+                    table.PrimaryKey("PK_EventRegistrations", x => new { x.AttendeesId, x.EventsId });
                     table.ForeignKey(
-                        name: "FK_AttendeeEvent_Attendees_AttendeesId",
+                        name: "FK_EventRegistrations_Attendees_AttendeesId",
                         column: x => x.AttendeesId,
                         principalTable: "Attendees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AttendeeEvent_Events_EventsId",
+                        name: "FK_EventRegistrations_Events_EventsId",
                         column: x => x.EventsId,
                         principalTable: "Events",
                         principalColumn: "Id",
@@ -35,8 +35,8 @@ namespace G_Net_34_EF02.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AttendeeEvent_EventsId",
-                table: "AttendeeEvent",
+                name: "IX_EventRegistrations_EventsId",
+                table: "EventRegistrations",
                 column: "EventsId");
         }
 
@@ -44,7 +44,7 @@ namespace G_Net_34_EF02.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AttendeeEvent");
+                name: "EventRegistrations");
         }
     }
 }

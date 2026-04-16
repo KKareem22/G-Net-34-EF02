@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace G_Net_34_EF02.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260416154500_Create RelationShips AttendeeEvent")]
-    partial class CreateRelationShipsAttendeeEvent
+    [Migration("20260416161959_Create RelationShips EventRegistrations")]
+    partial class CreateRelationShipsEventRegistrations
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,7 +37,7 @@ namespace G_Net_34_EF02.Migrations
 
                     b.HasIndex("EventsId");
 
-                    b.ToTable("AttendeeEvent");
+                    b.ToTable("EventRegistrations", (string)null);
                 });
 
             modelBuilder.Entity("G_Net_34_EF02.Model.Attendee", b =>
