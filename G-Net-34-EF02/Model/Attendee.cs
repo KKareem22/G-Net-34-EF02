@@ -14,5 +14,7 @@ namespace G_Net_34_EF02.Model
         public Address Address { get; set; } = new Address();
 
         public Badge? Badge { get; set; }//Auto-discovered from navigation properties and FK properties
+
+        public ICollection<Event> Events { get; set; } = new HashSet<Event>();
     }
 }

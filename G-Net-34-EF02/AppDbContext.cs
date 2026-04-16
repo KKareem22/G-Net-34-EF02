@@ -44,6 +44,9 @@ namespace G_Net_34_EF02
                 .WithOne(e => e.Organizer)
                 .HasForeignKey(e => e.OrganizerId);
 
+            modelBuilder.Entity<Attendee>()
+                .HasMany(a => a.Events)
+                .WithMany(e => e.Attendees);
         }
 
     }
