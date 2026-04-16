@@ -25,5 +25,10 @@ namespace G_Net_34_EF02.Model
 
         //M:M
         public ICollection<Attendee> Attendees { get; set; } = new HashSet<Attendee>();
+
+        //Recursive Relationship
+        public int? ParentEventId { get; set; }
+        public Event? ParentEvent { get; set; }
+        public ICollection<Event> Sessions { get; set; }=new HashSet<Event>();
     }
 }

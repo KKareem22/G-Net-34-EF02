@@ -48,6 +48,12 @@ namespace G_Net_34_EF02
                 .HasMany(a => a.Events)
                 .WithMany(e => e.Attendees)
                 .UsingEntity(j=>j.ToTable("EventRegistrations"));
+
+            modelBuilder.Entity<Event>()
+                .HasMany(e=>e.Sessions)
+                .WithOne(e=>e.ParentEvent)
+                .HasForeignKey(e=>e.ParentEventId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
     }
